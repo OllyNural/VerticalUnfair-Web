@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
-import { Grid, makeStyles, Button, Slider, Input, Radio, Card } from '@material-ui/core';
+import React, { useEffect, useRef } from 'react';
+import { Grid, makeStyles, Button, Slider, Input, Radio, Card, Box } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-import MembershipFee from '../MembershipFee';
+import MembershipFee from '../../utils/calcMembershipFee';
 
 const useStyles = makeStyles(theme => ({
     rootGridContainer: {
@@ -32,11 +32,21 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Create = ({ onSubmit }) => {
+const Create = ({ data, onSubmit }) => {
     const classes = useStyles();
 
     const [rentType, setRentType] = React.useState('week');
     const [rentValue, setRentValue] = React.useState(400);
+    const [membershipFee, setMembershipFee] = React.useState('');
+    
+    useEffect(() => {
+        setMembershipFee(MembershipFee({
+            fixedMembershipFee: data.fixedMembershipFee,
+            fixedMembershipFeeAmount: data.fixedMembershipFeeAmount,
+            rentType,
+            rentValue,
+        }))
+    }, [rentType, rentValue, membershipFee])
 
     // https://material-ui.com/components/slider/
     const handleSliderChange = (event, newValue) => {
@@ -47,14 +57,21 @@ const Create = ({ onSubmit }) => {
         setRentValue(event.target.value === '' ? '' : Number(event.target.value));
     };
 
-    function handleRadioChange(event) {
+    const handleRadioChange = (event) => {
         setRentType(event.target.value);
+    };
+
+    const handleSubmit = () => {
+        // rent, membership fee, postcode, clientid
+        onSubmit({
+            rent: rentValue / 100,
+        })
     }
 
     return (
         <Grid item container className={classes.formGridContainer}>
             <Card className={classes.cardContainer} >
-                <form onSubmit={onSubmit} className={classes.formContainer}>
+                <form onSubmit={handleSubmit} className={classes.formContainer}>
                     <Grid item xs={12} >
                         <Typography variant='h4' className={classes.rentInputTitle} >Rent Input</Typography>
                         <Grid container justify="between" className={classes.radioBoxContainer} >
@@ -105,7 +122,11 @@ const Create = ({ onSubmit }) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} className={classes.membershipFeeContainer} >
-                        <MembershipFee fixedMembershipFee={false} rentType={rentType} rentValue={rentValue} />
+                        <Box component='div' className={classes.container} >
+                            <Typography variant='h6'>
+                                Your membership fee: £{membershipFee}
+                            </Typography>
+                        </Box>
                     </Grid>
                     <Grid item xs={12}>
                         <Button variant="contained" type="submit" color="primary" className={classes.button}>

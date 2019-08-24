@@ -1,24 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Grid, makeStyles } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Create from '../Create';
 import Layout from '../Layout';
 import Details from '../Details';
-import { Grid } from '@material-ui/core';
+
+import callApi from '../../utils/callApi';
+
+const useStyles = () => makeStyles({
+    CircularProgress: {
+        marginTop: '200px',
+    }
+})
+
+// I am assuming that we are passing in a singular client ID
+// So that we can do a GET on /config/:clientId
+// Otherwise I don't understand how a GET all /config/ will help us get a single value for fixed membership fee
+const CLIENT_ID = 1;
 
 const Container = () => {
+    const classes = useStyles();
+    const [data, setData] = useState(false);
     const [submitted, setSubmitted] = useState(false);
 
-    const onSubmit = (e) => {
-        console.log('hello');
-        console.log(e.target.value)
-        setSubmitted(!submitted);
+    useEffect(
+        () => {
+            (async () => {
+                const { data } = await callApi({
+                    endpoint: `config/${CLIENT_ID}`,
+                    method: 'GET',
+                });
+                setData(data)
+            })();
+        },
+        [],
+    );
+    const onSubmit = async (data) => {
+        console.log(data)
+        const res = await callApi({
+            endpoint: `config/${CLIENT_ID}`,
+            method: 'POST',
+
+        });
     }
 
     return (
         <Layout>
             <Grid container justify="center">
-                {!submitted ? 
-                    <Create onSubmit={onSubmit} /> :
-                    <Details />}
+                {data ?
+                    (!submitted ?
+                        <Create data={data} onSubmit={onSubmit} /> :
+                        <Details />) :
+                    <CircularProgress className={classes.CircularProgress} />
+                }
             </Grid>
         </Layout>
     )

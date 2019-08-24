@@ -22,6 +22,10 @@ Run using:
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+By default, the user passed will NOT have a fixed membership fee.
+
+If you want to change this to fixed, edit the /src/components/Container/Container.js CLIENT_ID variable to 2.
+
 ### Tests
 
 Run Tests using: 
@@ -42,4 +46,5 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Assumptions
 
-VAT is 20% of what - One weeks rent?
+Prices in Pence
+Client ID decided where? Assumed it is in browser from some sort of login session
