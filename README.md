@@ -40,5 +40,6 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 
 
+### Assumptions
 
-
+VAT is 20% of what - One weeks rent?
