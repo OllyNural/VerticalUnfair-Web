@@ -10,18 +10,20 @@ React App for the FlatBond application.
 
 ### Installation
 
-```npm install```
+`npm install`
 
-## Running
+### Running
 
 This should be run alongside the front end application found [here:](https://github.com/OllyNural/VerticalUnfair-Web).
 
-Run using:
+**Run using:**
 
-```npm run start```
+`npm run start`
+
 Runs the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
+#### Changing Fixed Membership Fee value
 By default, the user passed will NOT have a fixed membership fee.
 
 If you want to change this to fixed, edit the /src/components/Container/Container.js CLIENT_ID variable to 2.
@@ -46,11 +48,12 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Assumptions
 
-Prices in Pence
-Client ID decided where? Assumed it is in browser from some sort of login session
-With the contracts given, can't do full validation: We only pass in the rent. This means any calculation between month -> week of rent value is done client-side and can't be validated. 
+* Prices in Pence
+* Client ID decided where? Assumed it is in browser from some sort of login session
+* With the contracts given, can't do full validation: We only pass in the rent. This means any calculation between month -> week of rent value is done client-side and can't be validated. 
 
 ### Things left to do
-Front End Validation
-Hella, hella, hella tests 
-Feedback for unsuccessful POST request to submit for (at the moment, nothing happens) (more spinny loaders)
+
+* Front End Validation
+* Hella, hella, hella tests 
+* Feedback for unsuccessful POST request to submit for (at the moment, nothing happens) (more spinny loaders)
