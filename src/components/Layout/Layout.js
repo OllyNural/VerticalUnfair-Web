@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box, makeStyles, Typography, Link } from '@material-ui/core';
+import React, { Children } from 'react';
+import { makeStyles, Typography, Link } from '@material-ui/core';
 import AppBar from '@material-ui/core/AppBar';
 
 const useStyles = makeStyles(theme => ({
@@ -16,17 +16,20 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-const Layout = () => {
+const Layout = ({ children }) => {
     const classes = useStyles();
 
     return (
-        <AppBar position="static">
-            <Typography variant="h4" className={classes.title}>
-                <Link href={`/`} color="inherit" className={classes.link}>
-                    VerticalUnfair
-                </Link>
-            </Typography>
-        </AppBar>
+        <React.Fragment>
+            <AppBar position="static">
+                <Typography variant="h4" className={classes.title}>
+                    <Link href={`/`} color="inherit" className={classes.link}>
+                        VerticalUnfair
+                    </Link>
+                </Typography>
+            </AppBar>
+            {children}
+        </React.Fragment>
     )
 }
 
