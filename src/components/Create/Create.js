@@ -5,9 +5,6 @@ import Typography from '@material-ui/core/Typography';
 import MembershipFee from '../../utils/calcMembershipFee';
 
 const useStyles = makeStyles(theme => ({
-    rootGridContainer: {
-        margin: '0 auto',
-    },
     formGridContainer: {
         width: '50%',
         paddingTop: '50px',
@@ -21,6 +18,7 @@ const useStyles = makeStyles(theme => ({
     },
     cardContainer: {
         padding: '40px',
+        width: '100%',
     },
     rentInputTitle: {
         paddingBottom: '70px'
@@ -86,7 +84,7 @@ const Create = ({ data, onSubmit }) => {
                 <form onSubmit={handleSubmit} className={classes.formContainer}>
                     <Grid item xs={12} >
                         <Typography variant='h4' className={classes.rentInputTitle} >Rent Input</Typography>
-                        <Grid container justify="between" className={classes.radioBoxContainer} >
+                        <Grid container justify="space-between" className={classes.radioBoxContainer} >
                             <Grid item xs={6}>
                                 Rent By <b>Week</b>:
                                 <Radio
@@ -119,7 +117,7 @@ const Create = ({ data, onSubmit }) => {
                                 />
                             </Grid>
                             <Grid item>
-                                <Input
+                                £<Input
                                     className={classes.input}
                                     value={rentValue}
                                     onChange={handleSliderInputChange}
@@ -150,7 +148,7 @@ const Create = ({ data, onSubmit }) => {
                             margin="normal"
                         />
                     </Grid>
-                    <Grid item xs={12}>
+                    <Grid container item xs={12} justify="flex-end" >
                         <Button variant="contained" type="submit" color="primary" className={classes.button}>
                             Submit
                     </Button>

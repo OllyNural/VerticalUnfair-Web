@@ -48,3 +48,9 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 Prices in Pence
 Client ID decided where? Assumed it is in browser from some sort of login session
+With the contracts given, can't do full validation: We only pass in the rent. This means any calculation between month -> week of rent value is done client-side and can't be validated. 
+
+### Things left to do
+Front End Validation
+Hella, hella, hella tests 
+Feedback for unsuccessful POST request to submit for (at the moment, nothing happens) (more spinny loaders)

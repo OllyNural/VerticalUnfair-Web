@@ -20,8 +20,13 @@ const CLIENT_ID = 1;
 
 const Container = () => {
     const classes = useStyles();
-    const [data, setData] = useState(false);
+    const [configData, setConfigData] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [submittedData, setSubmittedData] = useState({
+        rent: '',
+        membershipFee: '',
+        postcode: ''
+    });
 
     useEffect(
         () => {
@@ -30,7 +35,7 @@ const Container = () => {
                     endpoint: `config/${CLIENT_ID}`,
                     method: 'GET',
                 });
-                setData(data)
+                setConfigData(data)
             })();
         },
         [],
@@ -50,16 +55,22 @@ const Container = () => {
         });
         if (res.status === 201) {
             setSubmitted(true);
+            setSubmittedData({...data});
         }
+    }
+
+    const handleGoBack = () => {
+        setSubmitted(false);
+        setSubmittedData({});
     }
 
     return (
         <Layout>
             <Grid container justify="center">
-                {data ?
+                {configData ?
                     (!submitted ?
-                        <Create data={data} onSubmit={onSubmit} /> :
-                        <Details />) :
+                        <Create data={configData} onSubmit={onSubmit} /> :
+                        <Details data={submittedData} handleOnClick={handleGoBack} />) :
                     <CircularProgress className={classes.CircularProgress} />
                 }
             </Grid>

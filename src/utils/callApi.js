@@ -7,6 +7,9 @@ const API_DOMAIN = process.env.API_DOMAIN || 'http://localhost:8000';
 
 const callApi = async ({ endpoint, options }) => axios({
     url: `${API_DOMAIN}/${endpoint}`,
+    headers: {
+        'Content-Type': 'application/json',
+    },
     ...options,
   })
 
