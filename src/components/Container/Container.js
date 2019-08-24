@@ -36,12 +36,21 @@ const Container = () => {
         [],
     );
     const onSubmit = async (data) => {
-        console.log(data)
         const res = await callApi({
-            endpoint: `config/${CLIENT_ID}`,
-            method: 'POST',
-
+            endpoint: `flatbond`,
+            options: {
+                method: 'POST',
+                data: {
+                    params: {
+                        ...data,
+                        clientId: CLIENT_ID
+                    }
+                }
+            }
         });
+        if (res.status === 201) {
+            setSubmitted(true);
+        }
     }
 
     return (

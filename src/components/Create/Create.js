@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Grid, makeStyles, Button, Slider, Input, Radio, Card, Box } from '@material-ui/core';
+import { Grid, makeStyles, Button, Slider, Input, Radio, Card, Box, TextField } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
 import MembershipFee from '../../utils/calcMembershipFee';
@@ -11,6 +11,10 @@ const useStyles = makeStyles(theme => ({
     formGridContainer: {
         width: '50%',
         paddingTop: '50px',
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
     },
     formContainer: {
         width: '100%',
@@ -38,7 +42,8 @@ const Create = ({ data, onSubmit }) => {
     const [rentType, setRentType] = React.useState('week');
     const [rentValue, setRentValue] = React.useState(400);
     const [membershipFee, setMembershipFee] = React.useState('');
-    
+    const [postcode, setPostcode] = React.useState('');
+
     useEffect(() => {
         setMembershipFee(MembershipFee({
             fixedMembershipFee: data.fixedMembershipFee,
@@ -61,10 +66,17 @@ const Create = ({ data, onSubmit }) => {
         setRentType(event.target.value);
     };
 
-    const handleSubmit = () => {
+    const handlePostcodeChange = event => {
+        setPostcode(event.target.value);
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
         // rent, membership fee, postcode, clientid
         onSubmit({
-            rent: rentValue / 100,
+            rent: rentValue * 100,
+            membershipFee: membershipFee * 100,
+            postCode: postcode
         })
     }
 
@@ -127,6 +139,16 @@ const Create = ({ data, onSubmit }) => {
                                 Your membership fee: £{membershipFee}
                             </Typography>
                         </Box>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            id="postcode-input"
+                            label="Postcode"
+                            className={classes.textField}
+                            value={postcode}
+                            onChange={handlePostcodeChange}
+                            margin="normal"
+                        />
                     </Grid>
                     <Grid item xs={12}>
                         <Button variant="contained" type="submit" color="primary" className={classes.button}>
