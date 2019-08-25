@@ -53,6 +53,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Things left to do
 
-* Front End Validation
 * Hella, hella, hella tests 
+* Front End Validation
+* Needs some refactoring on the front end - would like to split the form up into components but not super important rn
 * Feedback for unsuccessful POST request to submit for (at the moment, nothing happens) (more spinny loaders)
+* Refactor and test calcMembershipFee + convertMonthToWeek
