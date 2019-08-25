@@ -48,7 +48,8 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ### Assumptions
 
 * Prices in Pence
-* Client ID decided where? Assumed it is in browser from some sort of login session
+* Requirement said GET /config/ for the first page - I have done GET /config/:id for the first page, as this makes more sense. Unsure of how getting list of configuration for a single user is useful, as we need to know the specific ID/membership values etc
+* Client ID decided where? Assumed it is in browser from some sort of login session.
 * With the contracts given, can't do full validation: We only pass in the rent. This means any calculation between month -> week of rent value is done client-side and can't be validated. 
 
 ### Things left to do
