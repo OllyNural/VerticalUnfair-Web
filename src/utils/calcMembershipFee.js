@@ -16,7 +16,7 @@ const MembershipFee = ({ fixedMembershipFee, fixedMembershipFeeAmount, rentType,
         membershipFee = fixedMembershipFeeAmount;
     } else {
         // Going to use/assume 4.34524 weeks per month (bc Google told me so)
-        rentValue = rentType === 'week' ? rentValue : (rentValue / 4.34524)
+        rentValue = rentType === 'week' ? rentValue : convertMonthToWeek(rentValue)
         if (rentValue < 120) rentValue = 120
         membershipFee = rentValue
     }
@@ -26,4 +26,9 @@ const MembershipFee = ({ fixedMembershipFee, fixedMembershipFeeAmount, rentType,
     return membershipFee
 }
 
-export default MembershipFee;
+const convertMonthToWeek = (rentValue) => Math.floor(rentValue / 4.34524)
+
+export {
+    convertMonthToWeek,
+    MembershipFee
+}

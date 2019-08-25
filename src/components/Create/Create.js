@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Grid, makeStyles, Button, Slider, Input, Radio, Card, Box, TextField } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 
-import MembershipFee from '../../utils/calcMembershipFee';
+import { MembershipFee, convertMonthToWeek } from '../../utils/calcMembershipFee';
 
 const useStyles = makeStyles(theme => ({
     formGridContainer: {
@@ -71,8 +71,10 @@ const Create = ({ data, onSubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         // rent, membership fee, postcode, clientid
+        // if morentType is month, convert to week
+        let rent = rentType === 'month' ? convertMonthToWeek(rentValue) : rentValue
         onSubmit({
-            rent: rentValue * 100,
+            rent: rent * 100,
             membershipFee: membershipFee * 100,
             postCode: postcode
         })

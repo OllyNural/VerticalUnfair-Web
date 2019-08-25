@@ -32,7 +32,7 @@ If you want to change this to fixed, edit the /src/components/Container/Containe
 
 Run Tests using: 
 
-```npm run test```
+`npm run test`
 
 ### Build
 
@@ -43,7 +43,6 @@ The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
 
 
 ### Assumptions
